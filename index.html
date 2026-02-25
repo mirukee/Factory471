@@ -1,0 +1,357 @@
+﻿<!DOCTYPE html>
+
+<html class="dark" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>FACTORY 471</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#75f21c",
+                        "background-light": "#f7f8f5",
+                        "background-dark": "#172210",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
+    <!-- Top Navigation -->
+    <header
+        class="sticky top-0 z-50 w-full border-b border-neutral-200 dark:border-white/10 bg-background-light/90 dark:bg-[#141811]/90 backdrop-blur-md">
+        <div class="max-w-[1280px] mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3 text-slate-900 dark:text-white">
+                <div class="w-8 h-8 text-primary">
+                    <svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_6_330)">
+                            <path clip-rule="evenodd"
+                                d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z"
+                                fill="currentColor" fill-rule="evenodd"></path>
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_6_330">
+                                <rect fill="white" height="48" width="48"></rect>
+                            </clipPath>
+                        </defs>
+                    </svg>
+                </div>
+                <h2 class="text-xl font-bold tracking-tight">FACTORY 471</h2>
+            </div>
+            <nav class="hidden md:flex items-center gap-8">
+                <a class="text-sm font-medium hover:text-primary transition-colors" href="index.html">Home</a>
+                <!-- Apps Dropdown -->
+                <div class="nav-dropdown">
+                    <button
+                        class="flex items-center gap-1 text-sm font-medium hover:text-primary transition-colors focus:outline-none">
+                        Apps
+                        <span class="material-symbols-outlined dropdown-arrow"
+                            style="font-size:16px;vertical-align:middle">keyboard_arrow_down</span>
+                    </button>
+                    <div class="nav-dropdown-menu">
+                        <a href="ssak-photo-cleaner.html">
+                            <span class="material-symbols-outlined" style="font-size:16px">cleaning_services</span>
+                            SSAK
+                        </a>
+                        <div class="menu-divider"></div>
+                        <a href="snow-record.html">
+                            <span class="material-symbols-outlined" style="font-size:16px">ac_unit</span>
+                            Snow Record
+                        </a>
+                        <div class="menu-divider"></div>
+                        <a href="wayin-korea.html">
+                            <span class="material-symbols-outlined" style="font-size:16px">near_me</span>
+                            Wayin Korea
+                        </a>
+                    </div>
+                </div>
+                <a class="text-sm font-medium hover:text-primary transition-colors" href="about.html">About</a>
+                <a class="text-sm font-medium hover:text-primary transition-colors" href="mailto:contact@factory471.xyz">Contact</a>
+            </nav>
+            <a href="mailto:contact@factory471.xyz"
+                class="hidden md:flex bg-primary hover:bg-primary/90 text-[#141811] px-5 py-2 rounded-lg text-sm font-bold transition-transform active:scale-95 items-center">
+                Get in Touch
+            </a>
+            <!-- Mobile Menu Icon -->
+            <button class="md:hidden text-slate-900 dark:text-white">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+        </div>
+    </header>
+    <main class="flex-grow">
+        <!-- Hero Section -->
+        <section
+            class="relative w-full min-h-[600px] flex items-center justify-center overflow-hidden bg-background-dark">
+            <!-- Background Elements -->
+            <div class="absolute inset-0 z-0">
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-background-dark via-[#1a2e15] to-background-dark opacity-90">
+                </div>
+                <!-- Abstract geometric overlay -->
+                <div
+                    class="absolute right-0 top-0 w-1/2 h-full bg-[linear-gradient(to_right,rgba(117,242,28,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(117,242,28,0.05)_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]">
+                </div>
+            </div>
+            <div class="relative z-10 max-w-[1280px] mx-auto px-6 py-20 grid lg:grid-cols-2 gap-12 items-center">
+                <div class="flex flex-col gap-6 text-left">
+                    <div id="hero-badge"
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 w-fit anim-hidden">
+                        <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                        <span class="text-primary text-xs font-bold uppercase tracking-wider">Factory 471 Mobile Studio</span>
+                    </div>
+                    <h1 id="hero-title"
+                        class="text-5xl lg:text-7xl font-black leading-tight tracking-tight text-white anim-hidden">
+                        Build Useful <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-green-400">Mobile
+                            Products</span>
+                    </h1>
+                    <p id="hero-desc" class="text-lg text-slate-300 max-w-xl font-light leading-relaxed anim-hidden">
+                        FACTORY 471 creates practical apps for everyday life. Explore product documentation, support
+                        pages, and company information in one place.
+                    </p>
+                    <div id="hero-buttons" class="flex flex-wrap gap-4 mt-4 anim-hidden">
+                        <a href="#creations"
+                            class="bg-primary hover:bg-primary/90 text-[#141811] px-8 py-3.5 rounded-lg text-base font-bold transition-all hover:shadow-[0_0_20px_rgba(117,242,28,0.4)] flex items-center gap-2">
+                            Explore Our Apps
+                            <span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+                        </a>
+                        <a href="about.html"
+                            class="bg-white/5 hover:bg-white/10 text-white border border-white/10 px-8 py-3.5 rounded-lg text-base font-bold transition-all backdrop-blur-sm">
+                            About Factory 471
+                        </a>
+                    </div>
+                </div>
+                <div id="hero-image" class="relative hidden lg:block h-[500px] w-full anim-hidden">
+                    <!-- Abstract Hero Image -->
+                    <div class="absolute inset-0 bg-cover bg-center rounded-2xl shadow-2xl border border-white/5"
+                        style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBNGCvRvceGks7n_zTDRLT5ihDwSRFUBjeeaIbVlXu1bW-IEIigZZHom47cbVJV74Icps43SRCS3s12QntfXmy-QYRMXLudf52QysLO5mTCtvi4yOT--sCSGhxrPY3vQCAkT84BF6VaCLsS2f7RSEMbWCNyBF3Rd5y1Xb588UKc1mqSJxpXjtdb_JynoKtoCat0Rm_eYP3PuxQBeiNvkJ0K20L3cV9ezNgb8Bz9dH3fLCfIM1ZFJmPfZC3RqytIJ5NC_45OSdIykxwZ');">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-background-dark via-transparent to-transparent">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Creations Section -->
+        <section id="creations" class="py-24 bg-background-dark relative">
+            <div class="max-w-[1280px] mx-auto px-6">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                    <div id="creations-header" class="anim-hidden-left">
+                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Our Creations</h2>
+                        <p class="text-slate-400 max-w-lg">Discover our suite of applications designed to enhance your
+                            digital lifestyle.</p>
+                    </div>
+                    <a id="creations-link"
+                        class="text-primary font-bold hover:underline underline-offset-4 flex items-center gap-1 anim-hidden"
+                        href="about.html">
+                        View all projects
+                        <span class="material-symbols-outlined text-[18px]">arrow_right_alt</span>
+                    </a>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Card 1: SSAK -->
+                    <div
+                        class="glass-card app-card group rounded-2xl p-6 md:p-8 transition-all hover:-translate-y-1 hover:border-primary/30 flex flex-col h-full anim-hidden">
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="p-3 bg-primary/10 rounded-xl text-primary">
+                                <span class="material-symbols-outlined text-3xl">cleaning_services</span>
+                            </div>
+                            <span
+                                class="text-xs font-bold px-3 py-1 bg-white/5 rounded-full text-slate-300 border border-white/10">Utility</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-primary transition-colors">SSAK:
+                            Photo Cleaner</h3>
+                        <p class="text-slate-400 mb-8 flex-grow">
+                            The ultimate AI-powered photo organization tool. Clean up your gallery in seconds with smart
+                            detection algorithms that identify duplicates and blurry shots.
+                        </p>
+                        <div
+                            class="relative w-full aspect-video rounded-xl overflow-hidden mb-6 bg-neutral-900 border border-white/5 group-hover:border-primary/20 transition-colors">
+                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDG-DhhAh4OuFt6viNRCa08ppiiYZWs6bOxmo33xVn77YI6vyELjGieE-rsigDxZPZgysoiZ0__zjxalAKeB4SWOq2jtGTz5TJlf2CGXVPWQnqqLSHlrilQmhdzvkfGgPE0D8Dx6z8ol6Q4C4vwLsy6aiFNGm49kZkJhU8fvw1JhUEuhArQAHXbXRpJ1KwJOFSZvy0gLz8ODSt3CE12tkuOPjIwVeVRa2qMGfk62GCDUwriQAQAXY1ciPl9gt1R0K0BFkzBpp1Njkcy');">
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="ssak-photo-cleaner-support.html"
+                                class="flex-1 border border-primary text-primary hover:bg-primary hover:text-[#141811] h-10 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">support_agent</span>
+                                User Support
+                            </a>
+                            <a href="ssak-photo-cleaner.html"
+                                class="flex-1 border border-white/20 text-white hover:bg-white/10 h-10 rounded-lg text-sm font-bold transition-all flex items-center justify-center">
+                                View Docs
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Card 2: Snow Paradise -->
+                    <div
+                        class="glass-card app-card group rounded-2xl p-6 md:p-8 transition-all hover:-translate-y-1 hover:border-primary/30 flex flex-col h-full anim-hidden">
+                        <div class="flex justify-between items-start mb-6">
+                            <div
+                                class="p-3 bg-blue-500/10 rounded-xl text-blue-400 group-hover:text-primary group-hover:bg-primary/10 transition-colors">
+                                <span class="material-symbols-outlined text-3xl">ac_unit</span>
+                            </div>
+                            <span
+                                class="text-xs font-bold px-3 py-1 bg-white/5 rounded-full text-slate-300 border border-white/10">Sports</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-primary transition-colors">Snow
+                            Record</h3>
+                        <p class="text-slate-400 mb-8 flex-grow">
+                            An immersive winter sports tracking application. Record your runs, analyze real-time stats,
+                            and share your powder days with a community of enthusiasts.
+                        </p>
+                        <div
+                            class="relative w-full aspect-video rounded-xl overflow-hidden mb-6 bg-neutral-900 border border-white/5 group-hover:border-primary/20 transition-colors">
+                            <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBsxyqxBeVJBPAwubrS2RHeRVLNGUj4veffOeAbp8HroRN3wd4Gj5rXJKjHlfCL_MXsi2vbJOSA2GaH2QGdMOotUOqzeaQXLutHgQqf1zaagHdqL4YLZntp6LrT7bTb8-IZR0cY4TeLetoy5tYBEPer5bGQ5obcx3-r-jDVZ0qTNd-hO9P0UYbAZ4jIpVinQeTdJsmqvpompUxIxCeIgOBmJAqcv5kSgFt6QZeF2LSXvl7PbJW04MMoEXE5DqT9WLp9f5AMNzXV4FZ9');">
+                            </div>
+                        </div>
+                        <div class="flex gap-3">
+                            <a href="snow-record-support.html"
+                                class="flex-1 border border-primary text-primary hover:bg-primary hover:text-[#141811] h-10 rounded-lg text-sm font-bold transition-all flex items-center justify-center gap-2">
+                                <span class="material-symbols-outlined text-[18px]">support_agent</span>
+                                User Support
+                            </a>
+                            <a href="snow-record.html"
+                                class="flex-1 border border-white/20 text-white hover:bg-white/10 h-10 rounded-lg text-sm font-bold transition-all flex items-center justify-center">
+                                View Docs
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Contact CTA Section -->
+        <section class="py-20 bg-[#12160e]">
+            <div class="max-w-[960px] mx-auto px-6 text-center">
+                <div id="cta-card"
+                    class="glass-card rounded-2xl p-10 md:p-16 relative overflow-hidden anim-hidden-scale">
+                    <div class="absolute top-0 right-0 -mr-16 -mt-16 w-64 h-64 bg-primary/20 rounded-full blur-3xl">
+                    </div>
+                    <div class="absolute bottom-0 left-0 -ml-16 -mb-16 w-64 h-64 bg-primary/10 rounded-full blur-3xl">
+                    </div>
+                    <div class="relative z-10">
+                        <h2 class="text-3xl font-bold text-white mb-4">Need Support or Partnership?</h2>
+                        <p class="text-slate-400 mb-8 max-w-2xl mx-auto">For app support, business inquiries, or
+                            company information, contact FACTORY 471 directly. We usually respond within 1-2 business
+                            days.</p>
+                        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                            <a href="mailto:contact@factory471.xyz"
+                                class="bg-primary hover:bg-primary/90 text-[#141811] px-6 py-3 rounded-lg font-bold transition-all">
+                                contact@factory471.xyz
+                            </a>
+                            <a href="about.html"
+                                class="bg-white/5 hover:bg-white/10 text-white border border-white/10 px-6 py-3 rounded-lg font-bold transition-all">
+                                Company Overview
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-background-dark border-t border-white/5 py-12">
+        <div class="max-w-[1280px] mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-3 text-white mb-6">
+                        <div class="w-6 h-6 text-primary">
+                            <svg class="w-full h-full" fill="none" viewBox="0 0 48 48"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_footer)">
+                                    <path clip-rule="evenodd"
+                                        d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z"
+                                        fill="currentColor" fill-rule="evenodd"></path>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_footer">
+                                        <rect fill="white" height="48" width="48"></rect>
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h2 class="text-lg font-bold tracking-tight">FACTORY 471</h2>
+                    </div>
+                    <p class="text-sm text-slate-500 mb-6">
+                        Building the future of mobile interaction, one pixel at a time.
+                    </p>
+                    <div class="flex flex-wrap gap-3 text-sm">
+                        <a class="text-slate-400 hover:text-primary transition-colors" href="mailto:contact@factory471.xyz">Email</a>
+                        <span class="text-slate-600">|</span>
+                        <a class="text-slate-400 hover:text-primary transition-colors" href="about.html">Company</a>
+                        <span class="text-slate-600">|</span>
+                        <a class="text-slate-400 hover:text-primary transition-colors" href="snow-record.html">Docs</a>
+                    </div>
+                </div>
+                <div class="col-span-1">
+                    <h3 class="text-white font-bold mb-4">Products</h3>
+                    <ul class="flex flex-col gap-2">
+                        <li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href="ssak-photo-cleaner.html">SSAK</a>
+                        </li>
+                        <li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href="snow-record.html">Snow
+                                Record</a></li>
+                        <li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href="wayin-korea.html">Wayin
+                                Korea</a></li>
+                    </ul>
+                </div>
+                <div class="col-span-1">
+                    <h3 class="text-white font-bold mb-4">Company</h3>
+                    <ul class="flex flex-col gap-2">
+                        <li><a class="text-slate-400 hover:text-primary transition-colors text-sm" href="about.html">About Us</a>
+                        </li>
+                        <li><a class="text-slate-400 hover:text-primary transition-colors text-sm"
+                                href="mailto:contact@factory471.xyz">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-span-1">
+                    <h3 class="text-white font-bold mb-4">Legal</h3>
+                    <ul class="flex flex-col gap-2">
+                        <li><a class="text-slate-400 hover:text-primary transition-colors text-sm"
+                                href="snow-record-privacy.html">Privacy Policy</a></li>
+                        <li><a class="text-slate-400 hover:text-primary transition-colors text-sm"
+                                href="snow-record-terms.html">Terms of Service</a></li>
+                        <li><a class="text-slate-400 hover:text-primary transition-colors text-sm"
+                                href="ssak-photo-cleaner-privacy.html">Data Policy (SSAK)</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-slate-500 text-sm">© 2026 FACTORY 471. All rights reserved.</p>
+                <div class="flex items-center gap-2 text-slate-500 text-sm">
+                    <span class="w-2 h-2 rounded-full bg-primary"></span>
+                    Systems Operational
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- GSAP + ScrollTrigger -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
+

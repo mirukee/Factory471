@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+.env
+
+# Editor
+.vscode/
+.idea/
+.DS_Store
+
+# Temporary / Data
+*.zip
+
+# Generated HTML files (except index.html)
+# We ignore these because GitHub Actions will build them.
+# The only static HTML we keep in Git is index.html.
+*.html
+!index.html
+
+# Generated artifacts from local testing
+.gemini/

@@ -94,12 +94,39 @@ DOCS = {
     "factory-about": {
         "title": "Factory 471",
         "md_glob": "Factory 471*.md",
-        "md_root": True,          # file lives in ROOT, not EXPORTS_DIR
+        "md_root": True,
         "out": "about.html",
         "app": None,
         "label": "About Us",
         "kind": "about",
         "notion_url": "https://actually-hamster-aa2.notion.site/Factory-471-30d5e95d9ec1806bade9cfeba9239800",
+    },
+    "chemviz-support": {
+        "title": "ChemViz - Customer Support",
+        "md_glob": "customer-support.md",
+        "md_dir": "ChemViz",
+        "out": "chemviz-support.html",
+        "app": "chemviz",
+        "label": "User Support",
+        "kind": "support",
+    },
+    "chemviz-privacy": {
+        "title": "ChemViz - Privacy Policy",
+        "md_glob": "privacy-policy.md",
+        "md_dir": "ChemViz",
+        "out": "chemviz-privacy.html",
+        "app": "chemviz",
+        "label": "Privacy Policy",
+        "kind": "privacy",
+    },
+    "chemviz-terms": {
+        "title": "ChemViz - Terms of Service",
+        "md_glob": "terms-of-service.md",
+        "md_dir": "ChemViz",
+        "out": "chemviz-terms.html",
+        "app": "chemviz",
+        "label": "Terms of Service",
+        "kind": "terms",
     },
 }
 
@@ -118,6 +145,11 @@ APPS = {
         "name": "Wayin Korea",
         "hub": "wayin-korea.html",
         "docs": ["wayin-privacy", "wayin-terms"],
+    },
+    "chemviz": {
+        "name": "ChemViz",
+        "hub": "chemviz.html",
+        "docs": ["chemviz-support", "chemviz-privacy", "chemviz-terms"],
     },
 }
 
@@ -733,7 +765,7 @@ def render_doc_page(doc_key: str, blocks: list[dict]) -> str:
 </nav></div>
 <div class="flex items-center gap-4">
 <button id="print-btn" class="hidden sm:flex p-2 rounded-lg hover:bg-neutral-200 dark:hover:bg-[#2f3928] text-slate-500 dark:text-[#a8ba9c] transition-colors" title="Print"><span class="material-symbols-outlined">print</span></button>
-<a class="bg-primary hover:bg-primary/90 text-background-dark text-sm font-bold px-5 py-2.5 rounded-lg transition-colors" href="{esc(meta["notion_url"])}" target="_blank" rel="noopener noreferrer">View on Notion</a>
+{f'<a class="bg-primary hover:bg-primary/90 text-background-dark text-sm font-bold px-5 py-2.5 rounded-lg transition-colors" href="{esc(meta["notion_url"])}" target="_blank" rel="noopener noreferrer">View on Notion</a>' if meta.get("notion_url") else ""}
 </div></div></header>
 <main class="flex-grow w-full px-6 md:px-10 py-8 mx-auto max-w-[1400px] doc-wrap">
 <nav class="flex items-center gap-2 text-sm text-slate-500 dark:text-[#a8ba9c] mb-6">
@@ -748,7 +780,7 @@ def render_doc_page(doc_key: str, blocks: list[dict]) -> str:
 <h1 class="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white mb-4">{esc(meta["label"])}</h1>
 <div class="flex flex-wrap items-center justify-between gap-4">
 <p class="text-slate-500 dark:text-[#a8ba9c] font-medium">{esc(update_text)}</p>
-<a class="p-2 rounded-lg hover:bg-neutral-200 dark:hover:bg-[#2f3928] text-slate-500 dark:text-[#a8ba9c] transition-colors" title="Open on Notion" href="{esc(meta["notion_url"])}" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined">open_in_new</span></a>
+{f'<a class="p-2 rounded-lg hover:bg-neutral-200 dark:hover:bg-[#2f3928] text-slate-500 dark:text-[#a8ba9c] transition-colors" title="Open on Notion" href="{esc(meta["notion_url"])}" target="_blank" rel="noopener noreferrer"><span class="material-symbols-outlined">open_in_new</span></a>' if meta.get("notion_url") else ""}
 </div></div>
 {tabs_html}
 <article class="notion-doc">
@@ -910,8 +942,13 @@ _LANG_SELECTOR_RE = re.compile(
 def load_md(doc_key: str) -> list[dict]:
     """Find and parse the markdown file for a given doc key."""
     meta = DOCS[doc_key]
-    # md_root=True → file is in project root, not notion_exports/
-    search_dir = ROOT if meta.get("md_root") else EXPORTS_DIR
+    if meta.get("md_root"):
+        search_dir = ROOT
+    elif "md_dir" in meta:
+        search_dir = ROOT / meta["md_dir"]
+    else:
+        search_dir = EXPORTS_DIR
+
     candidates = list(search_dir.glob(meta["md_glob"]))
     if not candidates:
         print(f"  [WARN] No markdown file found for {doc_key} in {search_dir} (pattern: {meta['md_glob']})")
@@ -958,7 +995,7 @@ def main():
         print(f"  → Written: {APPS[app_id]['hub']}")
 
     patch_index()
-    print("\nDone! ✅")
+    print("\nDone!")
 
 
 if __name__ == "__main__":

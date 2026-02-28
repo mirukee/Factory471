@@ -888,12 +888,12 @@ def render_hub_page(app_id: str, lang_map: dict) -> str:
 </div>
 <h1 class="text-slate-900 dark:text-white text-5xl md:text-6xl font-black leading-tight tracking-[-0.033em]">{esc(visual["hero_title"])}<span class="text-primary">.</span></h1>
 <p class="text-slate-600 dark:text-slate-400 text-lg md:text-xl font-normal leading-relaxed max-w-2xl">{esc(visual["hero_desc"])}</p>
-{{f'''<div class="flex gap-4 mt-2">
-<a href="{{esc(app["app_store_url"])}}" target="_blank" class="inline-flex items-center gap-2 bg-primary text-[#141811] hover:bg-primary/90 px-6 py-3 rounded-lg font-bold transition-all w-fit">
+{f'''<div class="flex gap-4 mt-2">
+<a href="{esc(app["app_store_url"])}" target="_blank" class="inline-flex items-center gap-2 bg-primary text-[#141811] hover:bg-primary/90 px-6 py-3 rounded-lg font-bold transition-all w-fit">
 <span class="material-symbols-outlined text-xl">download</span>
 Download on App Store
 </a>
-</div>''' if app.get("app_store_url") else ""}}
+</div>''' if app.get("app_store_url") else ""}
 </div></div></div>
 <div class="flex-1 bg-slate-50 dark:bg-[#141811]">
 <div class="max-w-7xl mx-auto px-6 lg:px-10 py-16">

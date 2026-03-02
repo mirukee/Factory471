@@ -60,17 +60,21 @@ export async function fetchPublishedPosts(): Promise<BlogPost[]> {
     }
 
     try {
-        const response = await notion.databases.query({
-            database_id: process.env.NOTION_DATABASE_ID,
-            // Assuming we add a 'Published' checkbox property later. 
-            // For now, fetch everything to ensure connection works.
-            sorts: [
-                {
-                    timestamp: 'created_time',
-                    direction: 'descending',
-                },
-            ],
+        const response = await notion.search({
+            filter: {
+                property: 'object',
+                value: 'page',
+            },
+            sort: {
+                timestamp: 'last_edited_time',
+                direction: 'descending',
+            },
         });
+        // Filter to only pages inside the target database
+        const databaseId = process.env.NOTION_DATABASE_ID!.replace(/-/g, '');
+        response.results = response.results.filter((page: any) =>
+            page.parent?.database_id?.replace(/-/g, '') === databaseId
+        );
 
         return response.results.map((page: any) => {
             const tempTitle = getPropertyValue(page.properties.이름) || getPropertyValue(page.properties.Name) || 'Untitled Post';

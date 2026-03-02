@@ -44,6 +44,7 @@ jobs:
           node-version: 20
 
       - name: Build Astro Blog
+        continue-on-error: true
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}

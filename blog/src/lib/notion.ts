@@ -1,16 +1,11 @@
-import pkg from '@notionhq/client';
-const { Client } = pkg;
+import { Client } from '@notionhq/client';
 import { NotionToMarkdown } from 'notion-to-md';
 import * as dotenv from 'dotenv';
 import path from 'path';
 
-// Load environment variables from .env file
 dotenv.config({ path: path.resolve(process.cwd(), '.env') });
 
-const notion = new Client({
-    auth: process.env.NOTION_TOKEN,
-});
-
+const notion = new Client({ auth: process.env.NOTION_TOKEN });
 const n2m = new NotionToMarkdown({ notionClient: notion });
 
 export interface BlogPost {
@@ -21,12 +16,10 @@ export interface BlogPost {
     description: string;
     tags: string[];
     coverImage: string | null;
-    content?: string;
 }
 
 function getPropertyValue(property: any): string | null {
     if (!property) return null;
-
     switch (property.type) {
         case 'title':
             return property.title[0]?.plain_text || null;
@@ -35,15 +28,15 @@ function getPropertyValue(property: any): string | null {
         case 'date':
             return property.date?.start || null;
         case 'multi_select':
-            return property.multi_select.map((item: any) => item.name).join(', ') || null;
+            return property.multi_select.map((i: any) => i.name).join(', ') || null;
         case 'select':
             return property.select?.name || null;
         case 'checkbox':
             return property.checkbox ? 'Yes' : 'No';
         case 'files':
-            if (property.files && property.files.length > 0) {
-                const file = property.files[0];
-                return file.type === 'external' ? file.external.url : file.file.url;
+            if (property.files?.length > 0) {
+                const f = property.files[0];
+                return f.type === 'external' ? f.external.url : f.file.url;
             }
             return null;
         default:
@@ -61,44 +54,22 @@ export async function fetchPublishedPosts(): Promise<BlogPost[]> {
     }
 
     try {
-        // Paginate through all results using notion.search()
-        const allPages: any[] = [];
-        let startCursor: string | undefined = undefined;
-        const normalizedDbId = databaseId.replace(/-/g, '');
-
-        let totalFetched = 0;
-        let sampleParent: any = null;
+        const results: any[] = [];
+        let cursor: string | undefined;
 
         do {
-            const response: any = await notion.search({
-                filter: { property: 'object', value: 'page' },
-                sort: { timestamp: 'last_edited_time', direction: 'descending' },
-                page_size: 100,
-                ...(startCursor ? { start_cursor: startCursor } : {}),
+            const response = await notion.databases.query({
+                database_id: databaseId,
+                sorts: [{ timestamp: 'created_time', direction: 'descending' }],
+                ...(cursor ? { start_cursor: cursor } : {}),
             });
+            results.push(...response.results);
+            cursor = response.has_more ? response.next_cursor ?? undefined : undefined;
+        } while (cursor);
 
-            totalFetched += response.results.length;
-            if (!sampleParent && response.results.length > 0) {
-                sampleParent = response.results[0].parent;
-            }
+        console.log(`[notion] Fetched ${results.length} posts from database.`);
 
-            // Keep only pages that belong to our target database
-            const filtered = response.results.filter((page: any) =>
-                page.parent?.database_id?.replace(/-/g, '') === normalizedDbId
-            );
-            allPages.push(...filtered);
-            startCursor = response.has_more ? response.next_cursor : undefined;
-        } while (startCursor);
-
-        console.log(`[notion] Search found ${allPages.length} matching pages in DB ${normalizedDbId}.`);
-        if (allPages.length === 0) {
-            console.log(`[notion] Raw API returned ${totalFetched} items across all pages.`);
-            if (sampleParent) {
-                console.log(`[notion] Sample item parent info:`, JSON.stringify(sampleParent));
-            }
-        }
-
-        return allPages.map((page: any) => {
+        return results.map((page: any) => {
             const tempTitle =
                 getPropertyValue(page.properties['이름']) ||
                 getPropertyValue(page.properties['Name']) ||
@@ -132,7 +103,7 @@ export async function fetchPublishedPosts(): Promise<BlogPost[]> {
                     ''
                 )
                     .split(',')
-                    .map((tag: string) => tag.trim())
+                    .map((t: string) => t.trim())
                     .filter(Boolean),
                 coverImage: page.cover
                     ? page.cover.type === 'external'

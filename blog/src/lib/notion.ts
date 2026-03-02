@@ -66,6 +66,9 @@ export async function fetchPublishedPosts(): Promise<BlogPost[]> {
         let startCursor: string | undefined = undefined;
         const normalizedDbId = databaseId.replace(/-/g, '');
 
+        let totalFetched = 0;
+        let sampleParent: any = null;
+
         do {
             const response: any = await notion.search({
                 filter: { property: 'object', value: 'page' },
@@ -74,6 +77,11 @@ export async function fetchPublishedPosts(): Promise<BlogPost[]> {
                 ...(startCursor ? { start_cursor: startCursor } : {}),
             });
 
+            totalFetched += response.results.length;
+            if (!sampleParent && response.results.length > 0) {
+                sampleParent = response.results[0].parent;
+            }
+
             // Keep only pages that belong to our target database
             const filtered = response.results.filter((page: any) =>
                 page.parent?.database_id?.replace(/-/g, '') === normalizedDbId
@@ -81,6 +89,14 @@ export async function fetchPublishedPosts(): Promise<BlogPost[]> {
             allPages.push(...filtered);
             startCursor = response.has_more ? response.next_cursor : undefined;
         } while (startCursor);
+
+        console.log(`[notion] Search found ${allPages.length} matching pages in DB ${normalizedDbId}.`);
+        if (allPages.length === 0) {
+            console.log(`[notion] Raw API returned ${totalFetched} items across all pages.`);
+            if (sampleParent) {
+                console.log(`[notion] Sample item parent info:`, JSON.stringify(sampleParent));
+            }
+        }
 
         return allPages.map((page: any) => {
             const tempTitle =

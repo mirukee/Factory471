@@ -2,7 +2,6 @@ import pkg from '@notionhq/client';
 const { Client } = pkg;
 import { NotionToMarkdown } from 'notion-to-md';
 import * as dotenv from 'dotenv';
-import fs from 'fs';
 import path from 'path';
 
 // Load environment variables from .env file
@@ -42,7 +41,6 @@ function getPropertyValue(property: any): string | null {
         case 'checkbox':
             return property.checkbox ? 'Yes' : 'No';
         case 'files':
-            // Return the URL of the first file/image
             if (property.files && property.files.length > 0) {
                 const file = property.files[0];
                 return file.type === 'external' ? file.external.url : file.file.url;
@@ -54,61 +52,92 @@ function getPropertyValue(property: any): string | null {
 }
 
 export async function fetchPublishedPosts(): Promise<BlogPost[]> {
-    if (!process.env.NOTION_DATABASE_ID) {
-        console.error("NOTION_DATABASE_ID is missing from .env");
+    const token = process.env.NOTION_TOKEN;
+    const databaseId = process.env.NOTION_DATABASE_ID;
+
+    if (!token || !databaseId) {
+        console.warn('[notion] NOTION_TOKEN or NOTION_DATABASE_ID not set — returning empty list.');
         return [];
     }
 
     try {
-        const response = await notion.search({
-            filter: {
-                property: 'object',
-                value: 'page',
-            },
-            sort: {
-                timestamp: 'last_edited_time',
-                direction: 'descending',
-            },
-        });
-        // Filter to only pages inside the target database
-        const databaseId = process.env.NOTION_DATABASE_ID!.replace(/-/g, '');
-        response.results = response.results.filter((page: any) =>
-            page.parent?.database_id?.replace(/-/g, '') === databaseId
-        );
+        // Paginate through all results using notion.search()
+        const allPages: any[] = [];
+        let startCursor: string | undefined = undefined;
+        const normalizedDbId = databaseId.replace(/-/g, '');
 
-        return response.results.map((page: any) => {
-            const tempTitle = getPropertyValue(page.properties.이름) || getPropertyValue(page.properties.Name) || 'Untitled Post';
+        do {
+            const response: any = await notion.search({
+                filter: { property: 'object', value: 'page' },
+                sort: { timestamp: 'last_edited_time', direction: 'descending' },
+                page_size: 100,
+                ...(startCursor ? { start_cursor: startCursor } : {}),
+            });
 
-            // Extract a slug from properties, or generate from title/id
-            let slug = getPropertyValue(page.properties.Slug) || getPropertyValue(page.properties.slug);
+            // Keep only pages that belong to our target database
+            const filtered = response.results.filter((page: any) =>
+                page.parent?.database_id?.replace(/-/g, '') === normalizedDbId
+            );
+            allPages.push(...filtered);
+            startCursor = response.has_more ? response.next_cursor : undefined;
+        } while (startCursor);
+
+        return allPages.map((page: any) => {
+            const tempTitle =
+                getPropertyValue(page.properties['이름']) ||
+                getPropertyValue(page.properties['Name']) ||
+                'Untitled Post';
+
+            let slug =
+                getPropertyValue(page.properties['Slug']) ||
+                getPropertyValue(page.properties['slug']);
             if (!slug) {
-                slug = tempTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '-');
+                slug = tempTitle
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/(^-|-$)+/g, '');
             }
 
             return {
                 id: page.id,
                 title: tempTitle,
-                slug: slug,
-                date: getPropertyValue(page.properties.Date) || getPropertyValue(page.properties['생성 일시']) || page.created_time.split('T')[0],
-                description: getPropertyValue(page.properties.Description) || getPropertyValue(page.properties.요약) || '',
-                tags: (getPropertyValue(page.properties.Tags) || getPropertyValue(page.properties.태그) || '').split(',').map(tag => tag.trim()).filter(Boolean),
-                coverImage: page.cover ? (page.cover.type === 'external' ? page.cover.external.url : page.cover.file.url) : null,
+                slug,
+                date:
+                    getPropertyValue(page.properties['Date']) ||
+                    getPropertyValue(page.properties['생성 일시']) ||
+                    page.created_time.split('T')[0],
+                description:
+                    getPropertyValue(page.properties['Description']) ||
+                    getPropertyValue(page.properties['요약']) ||
+                    '',
+                tags: (
+                    getPropertyValue(page.properties['Tags']) ||
+                    getPropertyValue(page.properties['태그']) ||
+                    ''
+                )
+                    .split(',')
+                    .map((tag: string) => tag.trim())
+                    .filter(Boolean),
+                coverImage: page.cover
+                    ? page.cover.type === 'external'
+                        ? page.cover.external.url
+                        : page.cover.file.url
+                    : null,
             };
         });
     } catch (error) {
-        console.error("Error fetching Notion posts:", error);
+        console.error('[notion] Error fetching posts:', error);
         return [];
     }
 }
-
 
 export async function fetchPostContent(pageId: string): Promise<string> {
     try {
         const mdblocks = await n2m.pageToMarkdown(pageId);
         const mdString = n2m.toMarkdownString(mdblocks);
-        return mdString.parent || "";
+        return mdString.parent || '';
     } catch (error) {
-        console.error("Error converting Notion page to Markdown:", error);
-        return "";
+        console.error('[notion] Error converting page to Markdown:', error);
+        return '';
     }
 }

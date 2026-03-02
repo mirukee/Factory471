@@ -764,6 +764,7 @@ def render_doc_page(doc_key: str, blocks: list[dict]) -> str:
 <h2 class="text-slate-900 dark:text-white text-lg font-bold tracking-tight">FACTORY 471</h2></a>
 <nav class="hidden md:flex items-center gap-8">
 <a class="text-slate-600 dark:text-[#a8ba9c] hover:text-primary transition-colors text-sm font-medium" href="index.html">Apps</a>
+<a class="text-slate-600 dark:text-[#a8ba9c] hover:text-primary transition-colors text-sm font-medium" href="blog/">Blog</a>
 <a class="text-slate-600 dark:text-[#a8ba9c] hover:text-primary transition-colors text-sm font-medium" href="about.html">Studio</a>
 </nav></div>
 <div class="flex items-center gap-4">
@@ -868,6 +869,7 @@ def render_hub_page(app_id: str, lang_map: dict) -> str:
 <div class="hidden md:flex flex-1 justify-end gap-8 items-center">
 <div class="flex items-center gap-9">
 <a class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors text-sm font-medium leading-normal" href="index.html">Apps</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors text-sm font-medium leading-normal" href="blog/">Blog</a>
 <a class="text-slate-600 dark:text-slate-300 hover:text-primary transition-colors text-sm font-medium leading-normal" href="about.html">Studio</a>
 </div>
 <a class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-6 bg-primary text-background-dark text-sm font-bold leading-normal tracking-[0.015em] hover:opacity-90 transition-opacity" href="index.html"><span class="truncate">Home</span></a>

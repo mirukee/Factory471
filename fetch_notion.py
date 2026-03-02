@@ -86,3 +86,4 @@ for name, url in urls.items():
             
     except Exception as e:
         print(f"Error fetching {name}: {e}")
+

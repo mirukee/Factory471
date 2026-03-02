@@ -1,0 +1,56 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
+import { fetchPublishedPosts } from '../../lib/notion';
+
+const posts = await fetchPublishedPosts();
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+	<head>
+		<BaseHead title={`${SITE_TITLE} Blog`} description={SITE_DESCRIPTION} />
+	</head>
+	<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
+		<Header />
+		<main class="flex-grow max-w-[1280px] mx-auto px-6 py-20 w-full">
+            <div class="mb-12 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">Latest Updates</h1>
+                <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">News, product updates, and insights from the Factory 471 team.</p>
+            </div>
+
+			<section>
+				<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+					{
+						posts.map((post) => (
+							<div class="glass-card flex flex-col h-full rounded-2xl overflow-hidden hover:-translate-y-1 transition-transform border border-neutral-200 dark:border-white/10 dark:bg-[#1a2214]">
+								<a href={`/blog/${post.slug}/`} class="flex flex-col h-full">
+									{post.coverImage && (
+                                        <div class="w-full aspect-[16/9] overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+										    <img class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={post.coverImage} alt={post.title} />
+                                        </div>
+									)}
+                                    <div class="p-6 flex flex-col flex-grow">
+                                        <div class="flex items-center gap-2 mb-3">
+                                            <span class="text-xs font-bold px-3 py-1 bg-primary/10 text-primary rounded-full">{post.tags[0] || 'Article'}</span>
+                                            <time class="text-sm text-slate-500">{post.date}</time>
+                                        </div>
+									    <h4 class="text-xl font-bold text-slate-900 dark:text-white mb-3 hover:text-primary transition-colors line-clamp-2">{post.title}</h4>
+                                        <p class="text-slate-600 dark:text-slate-400 text-sm line-clamp-3 mb-4 flex-grow">{post.description}</p>
+                                        <div class="mt-auto text-primary text-sm font-bold flex items-center gap-1 group">
+                                            Read More
+                                            <span class="material-symbols-outlined text-[16px] transition-transform group-hover:translate-x-1">arrow_forward</span>
+                                        </div>
+                                    </div>
+								</a>
+							</div>
+						))
+					}
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

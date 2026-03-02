@@ -1,0 +1,21 @@
+---
+import { fetchPublishedPosts, fetchPostContent } from '../../lib/notion';
+import BlogPost from '../../layouts/BlogPost.astro';
+import { marked } from 'marked';
+
+export async function getStaticPaths() {
+	const posts = await fetchPublishedPosts();
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: post,
+	}));
+}
+
+const post = Astro.props;
+const markdownContent = await fetchPostContent(post.id);
+const htmlContent = marked.parse(markdownContent);
+---
+
+<BlogPost {...post}>
+	<div class="prose dark:prose-invert" set:html={htmlContent} />
+</BlogPost>

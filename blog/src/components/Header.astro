@@ -1,0 +1,36 @@
+---
+import { SITE_TITLE } from '../consts';
+import HeaderLink from './HeaderLink.astro';
+---
+<header class="sticky top-0 z-50 w-full border-b border-neutral-200 dark:border-white/10 bg-background-light/90 dark:bg-[#141811]/90 backdrop-blur-md">
+    <div class="max-w-[1280px] mx-auto px-6 h-16 flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3 text-slate-900 dark:text-white group">
+            <div class="w-8 h-8 text-primary transition-transform group-hover:scale-110">
+                <svg class="w-full h-full" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_6_330)">
+                        <path clip-rule="evenodd"
+                            d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z"
+                            fill="currentColor" fill-rule="evenodd"></path>
+                    </g>
+                    <defs>
+                        <clipPath id="clip0_6_330">
+                            <rect fill="white" height="48" width="48"></rect>
+                        </clipPath>
+                    </defs>
+                </svg>
+            </div>
+            <h2 class="text-xl font-bold tracking-tight">FACTORY 471</h2>
+        </a>
+        <nav class="hidden md:flex items-center gap-8">
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="/index.html">Home</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors text-primary" href="/blog">Blog</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="/about.html">About</a>
+            <a class="text-sm font-medium hover:text-primary transition-colors" href="mailto:contact@factory471.xyz">Contact</a>
+        </nav>
+        <a href="mailto:contact@factory471.xyz"
+            class="hidden md:flex bg-primary hover:bg-primary/90 text-[#141811] px-5 py-2 rounded-lg text-sm font-bold transition-transform active:scale-95 items-center">
+            Get in Touch
+        </a>
+        <!-- Mobile Menu Icon could go here later if needed -->
+    </div>
+</header>

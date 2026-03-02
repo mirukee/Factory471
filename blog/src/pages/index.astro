@@ -3,46 +3,58 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { fetchPublishedPosts } from '../lib/notion';
+
+const posts = await fetchPublishedPosts();
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`${SITE_TITLE} Blog`} description={SITE_DESCRIPTION} />
 	</head>
-	<body>
+	<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden">
 		<Header />
-		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This template
-				serves as a lightweight, minimally-styled starting point for anyone looking to build a personal
-				website, blog, or portfolio with Astro.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to
-				<a href="https://docs.astro.build/">read the docs</a>
-				or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out
-				<a href="https://github.com/Charca/astro-blog-template">astro-blog-template</a>
-				by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+		<main class="flex-grow max-w-[1280px] mx-auto px-6 py-20 w-full">
+            <div class="mb-12 text-center">
+                <h1 class="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white mb-4">Latest Updates</h1>
+                <p class="text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">News, product updates, and insights from the Factory 471 team.</p>
+            </div>
+
+			<section>
+				{posts.length === 0 ? (
+					<div class="text-center py-24 text-slate-400 dark:text-slate-500">
+						<p class="text-lg">No posts yet. Check back soon!</p>
+					</div>
+				) : (
+					<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+						{
+							posts.map((post) => (
+								<div class="flex flex-col h-full rounded-2xl overflow-hidden hover:-translate-y-1 transition-transform border border-neutral-200 dark:border-white/10 dark:bg-[#1a2214]">
+									<a href={`blog/${post.slug}/`} class="flex flex-col h-full">
+										{post.coverImage && (
+                                            <div class="w-full aspect-[16/9] overflow-hidden bg-neutral-100 dark:bg-neutral-800">
+									 		    <img class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" src={post.coverImage} alt={post.title} />
+                                            </div>
+									    )}
+                                        <div class="p-6 flex flex-col flex-grow">
+                                            <div class="flex items-center gap-2 mb-3">
+                                                <span class="text-xs font-bold px-3 py-1 bg-primary/10 text-primary rounded-full">{post.tags[0] || 'Article'}</span>
+                                                <time class="text-sm text-slate-500">{post.date}</time>
+                                            </div>
+								 		    <h2 class="text-xl font-bold text-slate-900 dark:text-white mb-3 hover:text-primary transition-colors line-clamp-2">{post.title}</h2>
+                                            <p class="text-slate-600 dark:text-slate-400 text-sm line-clamp-3 mb-4 flex-grow">{post.description}</p>
+                                            <div class="mt-auto text-primary text-sm font-bold flex items-center gap-1">
+                                                Read More →
+                                            </div>
+                                        </div>
+									</a>
+								</div>
+							))
+						}
+					</div>
+				)}
+			</section>
 		</main>
 		<Footer />
 	</body>

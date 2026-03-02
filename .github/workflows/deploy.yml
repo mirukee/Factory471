@@ -41,7 +41,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
       - name: Build Astro Blog
         continue-on-error: true
@@ -52,12 +52,10 @@ jobs:
           cd blog
           npm ci
           npm run build
-          # The output goes to blog/dist by default. We want it served at /blog/
-          # Move the compiled files up one directory level so github pages serves them at domain.com/blog/
+          # Move Astro build output into blog/ so GitHub Pages serves it at factory471.com/blog/
           cd ..
-          rm -rf blog/src blog/node_modules blog/public blog/astro.config.mjs blog/package.json blog/package-lock.json blog/tsconfig.json
-          mv blog/dist/* blog/
-          rm -rf blog/dist
+          rsync -a blog/dist/ blog/
+          rm -rf blog/dist blog/src blog/node_modules blog/public blog/astro.config.mjs blog/package.json blog/package-lock.json blog/tsconfig.json blog/.astro
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

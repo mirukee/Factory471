@@ -15,6 +15,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 EXPORTS_DIR = ROOT / "notion_exports"
+ASSET_VERSION = "20260828d"
 
 # ── Document config ──────────────────────────────────────────────────────────
 
@@ -762,6 +763,7 @@ def render_doc_page(doc_key: str, blocks: list[dict]) -> str:
 {SCROLLBAR_STYLE}
 {LANG_TAB_CSS}
 </style>
+<link href="style.css?v={ASSET_VERSION}" rel="stylesheet"/>
 </head>
 <body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
 <header class="sticky top-0 z-50 w-full border-b border-neutral-200 dark:border-[#2f3928] bg-background-light/95 dark:bg-background-dark/95 backdrop-blur-md">
@@ -825,6 +827,7 @@ def render_doc_page(doc_key: str, blocks: list[dict]) -> str:
 <a class="text-slate-500 dark:text-[#a8ba9c] hover:text-primary transition-colors text-sm" href="index.html">Sitemap</a>
 </div></div></div></footer>
 {LANG_SCRIPT}
+<script src="site.js?v={ASSET_VERSION}"></script>
 </body></html>"""
 
 
@@ -868,6 +871,7 @@ def render_hub_page(app_id: str, lang_map: dict) -> str:
   background-size: 40px 40px;
 }}
 </style>
+<link href="style.css?v={ASSET_VERSION}" rel="stylesheet"/>
 </head>
 <body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
 <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#2f3928] px-6 py-4 lg:px-10 sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
@@ -936,6 +940,7 @@ Download on App Store
 <span class="text-sm font-bold">FACTORY 471</span></div>
 <div class="text-xs text-slate-500 dark:text-slate-400 text-center md:text-right"><p>&copy; 2026 FACTORY 471. All rights reserved.</p></div>
 </div></footer>
+<script src="site.js?v={ASSET_VERSION}"></script>
 </body></html>"""
 
 

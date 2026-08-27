@@ -3,12 +3,12 @@
 This document outlines the rules and architecture guidelines for AI agents working on this repository.
 
 ## 1. Project Architecture (CRITICAL)
-- This is a static website that hosts documentation (Privacy Policies, Terms of Service, Support) for Factory 471 apps (Snow Record, SSAK Photo Cleaner, Wayin Korea, ChemViz).
+- This is a static website that hosts documentation (Privacy Policies, Terms of Service, Support) for Factory 471 apps (Snow Record, SSAK Photo Cleaner, Wayin Korea, Melovue).
 - **NEVER** manually edit the generated HTML document pages (e.g., `*-privacy.html`, `*-terms.html`, `*-support.html`, `about.html`). Any manual changes to these files will be overwritten upon the next build.
 - The HTML pages are generated from Markdown files using a custom Python script.
 
 ## 2. Content Update Workflow
-- The source of truth for documents are Markdown files located in the `notion_exports/` directory or app-specific directories like `ChemViz/`.
+- The source of truth for documents are Markdown files located in the `notion_exports/` directory or app-specific directories like `Melovue/`.
 - **To update existing documents:** Edit the respective `.md` file and run `python build_site_pages.py` to regenerate the HTML.
 - **To import new Notion exports:** 
   1. Place the exported `.zip` files from Notion into the root directory.

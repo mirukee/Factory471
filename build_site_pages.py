@@ -101,31 +101,31 @@ DOCS = {
         "kind": "about",
         "notion_url": "https://actually-hamster-aa2.notion.site/Factory-471-30d5e95d9ec1806bade9cfeba9239800",
     },
-    "chemviz-support": {
-        "title": "ChemViz - Customer Support",
+    "melovue-support": {
+        "title": "Melovue - Customer Support",
         "md_glob": "customer-support.md",
-        "md_dir": "ChemViz",
-        "out": "chemviz-support.html",
-        "app": "chemviz",
+        "md_dir": "Melovue",
+        "out": "melovue-support.html",
+        "app": "melovue",
         "label": "User Support",
         "kind": "support",
     },
-    "chemviz-privacy": {
-        "title": "ChemViz - Privacy Policy",
+    "melovue-privacy": {
+        "title": "Melovue - Privacy Policy",
         "md_glob": "privacy-policy.md",
-        "md_dir": "ChemViz",
-        "out": "chemviz-privacy.html",
-        "app": "chemviz",
+        "md_dir": "Melovue",
+        "out": "melovue-privacy.html",
+        "app": "melovue",
         "label": "Privacy Policy",
         "kind": "privacy",
     },
-    "chemviz-terms": {
-        "title": "ChemViz - Terms of Service",
+    "melovue-terms": {
+        "title": "Melovue - Terms of Use",
         "md_glob": "terms-of-service.md",
-        "md_dir": "ChemViz",
-        "out": "chemviz-terms.html",
-        "app": "chemviz",
-        "label": "Terms of Service",
+        "md_dir": "Melovue",
+        "out": "melovue-terms.html",
+        "app": "melovue",
+        "label": "Terms of Use",
         "kind": "terms",
     },
 }
@@ -149,10 +149,10 @@ APPS = {
         "app_store_url": "https://apps.apple.com/kr/app/wayin-korea-link-converter/id6759513771",
         "docs": ["wayin-privacy", "wayin-terms"],
     },
-    "chemviz": {
-        "name": "ChemViz",
-        "hub": "chemviz.html",
-        "docs": ["chemviz-support", "chemviz-privacy", "chemviz-terms"],
+    "melovue": {
+        "name": "Melovue",
+        "hub": "melovue.html",
+        "docs": ["melovue-support", "melovue-privacy", "melovue-terms"],
     },
 }
 
@@ -488,6 +488,14 @@ def app_visuals(app_id: str):
             "hero_desc": "Legal and support documentation for SSAK: Photo Cleaner.",
             "icon": "cleaning_services",
             "image": "https://lh3.googleusercontent.com/aida-public/AB6AXuCGkhQMv5cUhNBfWTgZStHRpdoALN3_rdRvqHMdum2mCs_wazRU8Gzb7lU0oJkasuiXhnakH7cL-Qx4t41bVp6QYyasRdKtLFbhqnHMo3jsKTVd5AOJwTo-yFFLHJyFYbDQfx1K3eAaYFxkzDCHc8oHYDHX7WJPi2d9p_8d5T-VnvV3okqcxDVUI-EhSvMri913rbL5Ao61gW6ZCjhhl7QXqdranw-_iT_K8GyK_Jtikd_elO3D8EGGSaXIQ8l1jF5bfSA3X-tg0FMB",
+        }
+    if app_id == "melovue":
+        return {
+            "hero_label": "Melovue Docs",
+            "hero_title": "Melovue Documentation",
+            "hero_desc": "Support, privacy, and terms for the on-device visual creation app.",
+            "icon": "music_note",
+            "image": "https://images.unsplash.com/photo-1557683316-973673baf926?q=80&w=1600&auto=format&fit=crop",
         }
     return {
         "hero_label": "Wayin Korea Docs",
